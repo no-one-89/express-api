@@ -2,13 +2,28 @@ var express = require('express');
 var app = express();
 
 app.get('/', function (req, res) {
-  res.send('Hello World!');
+  let page = "<html>"+
+              "<body>"+
+                "<h1>index.html</h1>"+
+              "</body>"+
+            "</html>"
+  res.send(page);
 });
-app.get('/peter', function (req, res) {
-  console.log('Hello PPPPeter!');
+app.get('/about', function (req, res) {
+  let page = "<html>"+
+              "<body>"+
+                "<h1>about.html</h1>"+
+              "</body>"+
+            "</html>"
+  res.send(page);
 });
 app.get('/roger', function (req, res) {
-  console.log('Hello RRRRoger!');
+  let page = "<html>"+
+              "<body>"+
+                "<h1>roger.html</h1>"+
+              "</body>"+
+            "</html>"
+  res.send(page);
 });
 
 app.listen(3000,function(){
