@@ -9,22 +9,18 @@ app.get('/', function (req, res) {
             "</html>"
   res.send(page);
 });
-app.get('/about', function (req, res) {
+app.get('/:name', function (req, res) {
+  let userName = req.params.name
   let page = "<html>"+
               "<body>"+
-                "<h1>about.html</h1>"+
+                "<h1>"+userName+"的购物车"+"</h1>"+
               "</body>"+
             "</html>"
   res.send(page);
 });
-app.get('/roger', function (req, res) {
-  let page = "<html>"+
-              "<body>"+
-                "<h1>roger.html</h1>"+
-              "</body>"+
-            "</html>"
-  res.send(page);
-});
+app.post('/:name',function(req,res){
+  res.send(req.params.name)
+})
 
 app.listen(3000,function(){
   console.log('Running on port 3000....');
