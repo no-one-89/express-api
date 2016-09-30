@@ -1,14 +1,25 @@
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }))
 
-app.get('/posts', function (req, res) {
-  // let page = "<html>"+
-  //             "<body>"+
-  //               "<h1>index.html</h1>"+
-  //             "</body>"+
-  //           "</html>"
-  res.send('GET /posts');
+app.get('/write', function (req, res) {
+  let page = "<form method='post' action='/posts'>" +
+             "<input type='text' name='title' />" +
+             "<input type='submit' />" +
+             "</form>"
+  res.send(page);
 });
+
+app.post('/posts',function(req,res){
+  res.send(req.body.title)
+
+})
+
+app.delete('/posts/:id',function(req,res){
+  res.send('DELETE /posts/:id');
+})
 
 app.get('/posts/:id', function (req, res) {
 let userName = req.params.id
@@ -19,14 +30,6 @@ app.put('/posts/:id',function(req,res){
   let userName = req.params.id
 
   console.log(`PUT /posts/:${userName}`);
-})
-
-app.post('/posts',function(req,res){
-  res.send('POST /posts');
-})
-
-app.delete('/posts/:id',function(req,res){
-  res.send('DELETE /posts/:id');
 })
 
 app.listen(3000,function(){
