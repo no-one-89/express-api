@@ -5,6 +5,10 @@ var mongoose = require('mongoose');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
 
+// 关闭同源策略，开放CORS
+var cors = require('cors')
+app.use(cors());
+
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/digicity-express-api');
 
@@ -17,11 +21,14 @@ db.once('open', function() {
 
 app.get('/', function (req, res) {
   // res.redirect('https://www.google.com.hk')
-  let page = "<form method='post' action='/posts'>" +
-             "<input type='text' name='title' placeholder='请输入Title' />" +
-             "<input type='submit' />" +
-             "</form>"
-  res.send(page);
+  // let page = "<form method='post' action='/posts'>" +
+  //            "<input type='text' name='title' placeholder='请输入Title' />" +
+  //            "<input type='submit' />" +
+  //            "</form>"
+  // res.send(page);
+  Post.find().exec(function(err, posts) {
+    res.json({ posts: posts})
+  });
 });
 
 app.get('/posts', function (req, res) {
