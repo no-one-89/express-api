@@ -19,7 +19,7 @@ db.once('open', function() {
   console.log('database start success!')
 });
 
-app.get('/', function (req, res) {
+app.get('/posts', function (req, res) {
   // res.redirect('https://www.google.com.hk')
   // let page = "<form method='post' action='/posts'>" +
   //            "<input type='text' name='title' placeholder='请输入Title' />" +
@@ -31,11 +31,11 @@ app.get('/', function (req, res) {
   });
 });
 
-app.get('/posts', function (req, res) {
-  Post.find().exec(function(err, posts) {
-   res.send(posts);
- })
-});
+// app.get('/posts', function (req, res) {
+//   Post.find().exec(function(err, posts) {
+//    res.send(posts);
+//  })
+// });
 
 app.post('/posts',function(req,res){
   // res.send('The post title is : '+req.body.title)
