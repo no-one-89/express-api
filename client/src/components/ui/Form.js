@@ -8,7 +8,8 @@ class Form extends Component {
     const category = this.refs.category.value;
     const title = this.refs.title.value;
     const content = this.refs.content.value;
-    this.props.publishPost({category, title, content});
+    if(title.length == 0) return alert('内容不能为空！')
+    this.props.newPost({category, title, content});
   }
   getStyles() {
     return {
@@ -76,6 +77,16 @@ class Form extends Component {
         <div style={styles.div}>
           <label style={styles.label}>标题</label>
           <input style={styles.input} key='1' ref='title' />
+        </div>
+
+        <div style={styles.div}>
+          <label style={styles.label}>类别</label>
+          <input style={styles.input} key='2' ref='category' />
+        </div>
+
+        <div style={styles.div}>
+          <label style={styles.label}>内容</label>
+          <input style={styles.input} key='3' ref='content' />
         </div>
 
         <div style={styles.actions}>

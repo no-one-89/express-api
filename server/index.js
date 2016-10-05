@@ -39,24 +39,25 @@ app.get('/posts', function (req, res) {
 
 app.post('/posts',function(req,res){
   // res.send('The post title is : '+req.body.title)
-  var post = new Post({title:req.body.title})
+  var post = new Post({title:req.body.title,category:req.body.category,content:req.body.content})
   post.save(function(err){
+    // console.log(req.body);
     // 异步执行
-    if(err) console.log(err);
+    if(err) return console.log(err);
     console.log('saved!');
    });
-   res.redirect('/posts')
+   res.json({message:'成功'})
 
 })
 
-app.put('/posts/:id',function(req,res){
-  let userName = req.params.id
-
-  console.log(`PUT /posts/:${userName}`);
-})
-app.delete('/posts/:id',function(req,res){
-  res.send('DELETE /posts/:id');
-})
+// app.put('/posts/:id',function(req,res){
+//   let userName = req.params.id
+//
+//   console.log(`PUT /posts/:${userName}`);
+// })
+// app.delete('/posts/:id',function(req,res){
+//   res.send('DELETE /posts/:id');
+// })
 app.listen(3000,function(){
   console.log('Running on port 3000....');
 })
