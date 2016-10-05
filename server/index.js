@@ -31,11 +31,12 @@ app.get('/posts', function (req, res) {
   });
 });
 
-// app.get('/posts', function (req, res) {
-//   Post.find().exec(function(err, posts) {
-//    res.send(posts);
-//  })
-// });
+app.get('/post/:id', function (req, res) {
+  Post.findOne({_id:req.params.id}).exec(function(err, posts) {
+   res.json({post:posts});
+ })
+  // res.send(req.params.id)
+});
 
 app.post('/posts',function(req,res){
   // res.send('The post title is : '+req.body.title)

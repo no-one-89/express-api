@@ -55,6 +55,14 @@ export default class PostList extends Component {
       },
       title:{
         backgroundColor:'#FFFF66'
+      },
+      link:{
+        textDecoration:'none',
+        padding:'2px 6px',
+        backgroundColor:'#9933CC',
+        borderRadius:'6px',
+        fontSize:'14px',
+        color:'#fff'
       }
     }
   }
@@ -76,6 +84,7 @@ export default class PostList extends Component {
           <h3 style={styles.title}>{post.title}</h3>
           <h5 style={styles.category}>分类：<span style={styles.span}>{post.category}</span></h5>
           <p style={styles.content}>{post.content}</p>
+          <Link to={`/post/${post._id}`} style={styles.link}>查看</Link>
         </div>
       )
     }, this.state.posts);

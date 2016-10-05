@@ -9,7 +9,7 @@ class NewPost extends Component {
         width: '100%',
         maxWidth: '600px',
         margin: '30px auto',
-        backgroundColor: '#fff',
+        backgroundColor: '#339933',
         borderRadius: '10px',
         boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px'
       },

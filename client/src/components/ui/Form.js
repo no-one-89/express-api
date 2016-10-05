@@ -8,13 +8,14 @@ class Form extends Component {
     const category = this.refs.category.value;
     const title = this.refs.title.value;
     const content = this.refs.content.value;
-    if(title.length == 0) return alert('内容不能为空！')
+    if(title.length == 0 || category.length == 0 || content.length == 0) return alert('内容不能为空！')
     this.props.newPost({category, title, content});
   }
   getStyles() {
     return {
       form: {
         padding: '20px 40px',
+        backgroundColor:'#CCCC99'
       },
       div: {
         marginBottom: '10px'
@@ -62,7 +63,7 @@ class Form extends Component {
         display: 'inline-block',
         marginLeft: '15px',
         fontSize: '1em',
-        color: '#00bcd4',
+        color: '#003366',
         opacity: '.8',
         textDecoration: 'none'
       }
@@ -86,7 +87,7 @@ class Form extends Component {
 
         <div style={styles.div}>
           <label style={styles.label}>内容</label>
-          <input style={styles.input} key='3' ref='content' />
+          <textarea style={styles.input} key='3' ref='content' />
         </div>
 
         <div style={styles.actions}>
