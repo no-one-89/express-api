@@ -20,12 +20,6 @@ db.once('open', function() {
 });
 
 app.get('/posts', function (req, res) {
-  // res.redirect('https://www.google.com.hk')
-  // let page = "<form method='post' action='/posts'>" +
-  //            "<input type='text' name='title' placeholder='请输入Title' />" +
-  //            "<input type='submit' />" +
-  //            "</form>"
-  // res.send(page);
   Post.find().exec(function(err, posts) {
     res.json({ posts: posts})
   });
@@ -38,6 +32,21 @@ app.get('/post/:id', function (req, res) {
   // res.send(req.params.id)
 });
 
+app.put('/post/:id', function (req, res) {
+  Post.update({_id:req.params.id},{$set:{title:req.body.title,category:req.body.category,content:req.body.content}}).exec(function(err, posts) {
+   res.json({post:posts});
+   if(err) return console.log(err);
+   console.log('saved!');
+ })
+});
+//
+app.delete('/post/:id', function (req, res) {
+  Post.remove({_id:req.params.id}).exec(function(err, posts) {
+   res.json({post:posts});
+ })
+
+});
+
 app.post('/posts',function(req,res){
   // res.send('The post title is : '+req.body.title)
   var post = new Post({title:req.body.title,category:req.body.category,content:req.body.content})
@@ -48,7 +57,7 @@ app.post('/posts',function(req,res){
     console.log('saved!');
    });
    res.json({message:'成功'})
-
+ // res.redirect('http://www.baidu.com')
 })
 
 // app.put('/posts/:id',function(req,res){

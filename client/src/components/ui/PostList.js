@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import map from 'lodash/fp/map';
 import axios from 'axios';
-import {Link} from 'react-router'
-
+import {Link} from 'react-router';
+import DeleteList from './DeleteList'
 
 export default class PostList extends Component {
   constructor() {
@@ -11,6 +11,7 @@ export default class PostList extends Component {
       posts: []
     };
   }
+
   getStyles() {
     return {
       container: {
@@ -62,18 +63,16 @@ export default class PostList extends Component {
         backgroundColor:'#9933CC',
         borderRadius:'6px',
         fontSize:'14px',
-        color:'#fff'
+        color:'#fff',
+        marginRight:'5px'
       }
     }
   }
   componentWillMount() {
-    //  Promise
     axios.get('http://localhost:3000/posts').then(res => {
-      // console.log('axios');
       this.setState({
         posts: res.data.posts
       });
-      // console.log(this.state.posts);
     });
   }
   render() {
@@ -85,6 +84,8 @@ export default class PostList extends Component {
           <h5 style={styles.category}>分类：<span style={styles.span}>{post.category}</span></h5>
           <p style={styles.content}>{post.content}</p>
           <Link to={`/post/${post._id}`} style={styles.link}>查看</Link>
+          <Link to={`/modify/${post._id}`} style={styles.link}>编辑</Link>
+          <DeleteList style={styles.link} id={post._id} />
         </div>
       )
     }, this.state.posts);

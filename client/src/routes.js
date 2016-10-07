@@ -5,12 +5,14 @@ import App from './components/ui/App';
 import NewPost from './components/ui/NewPost';
 import PostList from './components/ui/PostList';
 import ShowPost from './components/ui/ShowPost';
+import Modify from './components/ui/Modify';
 
 export const renderRoutes = () => (
   <Router history={browserHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={PostList} />
       <Route path="/write" component={NewPost} />
+      <Route path="/modify/:id" component={Modify} />
       <Route path="/post/:id" component={ShowPost} />
     </Route>
   </Router>
