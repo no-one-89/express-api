@@ -41,6 +41,7 @@ app.put('/post/:id', function (req, res) {
 });
 //
 app.delete('/post/:id', function (req, res) {
+  console.log('delete');
   Post.remove({_id:req.params.id}).exec(function(err, posts) {
    res.json({post:posts});
  })

@@ -11,8 +11,8 @@ export const renderRoutes = () => (
   <Router history={browserHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={PostList} />
-      <Route path="/write" component={NewPost} />
-      <Route path="/modify/:id" component={Modify} />
+      <Route path="/posts/new" component={NewPost} />
+      <Route path="/post/:id/edit" component={Modify} />
       <Route path="/post/:id" component={ShowPost} />
     </Route>
   </Router>

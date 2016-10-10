@@ -39,13 +39,20 @@ class Modify extends React.Component {
     if(title.length == 0 || category.length == 0 || content.length == 0) return alert('内容不能为空！')
     axios.put(`http://localhost:3000/post/${id}`,{title,category,content})
     .then(res => {
-      alert('修改成功')
       this.context.router.push('/');
     })
 
   }
   getStyles() {
     return {
+      content: {
+        width: '100%',
+        maxWidth: '600px',
+        margin: '30px auto',
+        backgroundColor: '#339933',
+        borderRadius: '10px',
+        boxShadow: 'rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px'
+      },
       form: {
         padding: '20px 40px',
         backgroundColor:'#CCCC99'
@@ -99,34 +106,43 @@ class Modify extends React.Component {
         color: '#003366',
         opacity: '.8',
         textDecoration: 'none'
+      },
+      title: {
+        fontSize: '1.2em',
+        textAlign: 'center',
+        paddingTop: '20px'
       }
     };
   }
   render() {
     const styles = this.getStyles();
     return (
-      <form style={styles.form} onSubmit={this.handleModify.bind(this)}>
+      <div style={styles.content}>
+        <div style={styles.title}>编辑</div>
+        <form style={styles.form} onSubmit={this.handleModify.bind(this)}>
 
-        <div style={styles.div}>
-          <label style={styles.label}>标题</label>
-          <input style={styles.input} key='1' ref='title' />
-        </div>
+          <div style={styles.div}>
+            <label style={styles.label}>标题</label>
+            <input style={styles.input} key='1' ref='title' />
+          </div>
 
-        <div style={styles.div}>
-          <label style={styles.label}>类别</label>
-          <input style={styles.input} key='2' ref='category' />
-        </div>
+          <div style={styles.div}>
+            <label style={styles.label}>类别</label>
+            <input style={styles.input} key='2' ref='category' />
+          </div>
 
-        <div style={styles.div}>
-          <label style={styles.label}>内容</label>
-          <textarea style={styles.input} key='3' ref='content' />
-        </div>
+          <div style={styles.div}>
+            <label style={styles.label}>内容</label>
+            <textarea style={styles.input} key='3' ref='content' />
+          </div>
 
-        <div style={styles.actions}>
-          <button type='submit' style={styles.button}>保存修改</button>
-          <Link to='/' style={styles.link}>取消</Link>
-        </div>
-      </form>
+          <div style={styles.actions}>
+            <button type='submit' style={styles.button}>保存修改</button>
+            <Link to='/' style={styles.link}>取消</Link>
+          </div>
+        </form>
+      </div>
+
     );
   }
 }

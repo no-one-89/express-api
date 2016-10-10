@@ -28,6 +28,7 @@ class NewPost extends Component {
     })
     console.log(data);
   }
+  
   render() {
     const styles = this.getStyles();
     return (

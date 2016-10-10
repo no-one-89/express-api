@@ -13,7 +13,6 @@ class ShowPost extends React.Component {
   componentDidMount() {
     let id = this.props.params.id
     axios.get(`http://localhost:3000/post/${id}`).then(res => {
-
       this.setState({
         content: res.data.post.content,
         title:res.data.post.title,
@@ -45,7 +44,7 @@ class ShowPost extends React.Component {
     return(
       <div>
         {this.state.wait ? '正在载入。。。。' : article }
-        <a style={styles.a} target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=67049155&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:67049155:53" alt="点击这里给我发消息" title="点击这里给我发消息"  /></a>
+        <a style={styles.a} target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=67049155&site=qq&menu=yes"><img style={{border:"0"}} src="http://wpa.qq.com/pa?p=2:67049155:53" alt="点击这里给我发消息" title="点击这里给我发消息"  /></a>
       </div>
     )
   }
