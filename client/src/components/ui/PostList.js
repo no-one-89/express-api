@@ -11,7 +11,8 @@ export default class PostList extends Component {
     super();
     this.state={
       posts: [],
-      id: '1'
+      id: '1',
+      searchPosts:[]
     };
   }
 
@@ -32,15 +33,15 @@ export default class PostList extends Component {
       },
       div:{
         display:"flex",
-        flexDirection:'column',
-        alignItems:'flex-end'
+        paddingTop:'10px',
+        justifyContent:'space-between'
       },
       button:{
         display:'block',
         width:'10vw',
         maxWidth:'120px',
-        minWidth:'65px',
-        marginTop:'10px',
+        minWidth:'75px',
+
         textAlign:'center',
         textDecoration:'none',
         borderRadius:'5px',
@@ -75,17 +76,43 @@ export default class PostList extends Component {
   componentDidMount() {
     axios.get('http://localhost:3000/posts').then(res => {
       this.setState({
-        posts: res.data.posts
-      }); 
-
+        posts: res.data.posts,
+        searchPosts: res.data.posts
+      });
     });
+  }
+  handleChange(){
+    axios.get('http://localhost:3000/posts').then(res => {
+      this.setState({
+        posts: res.data.posts,
+        searchPosts: res.data.posts
+      });
+
+      var arr = this.state.searchPosts
+      let value = this.refs.search.value;
+      let posts = []
+      console.log('arr:'+arr);
+      for(let i in arr){
+        // console.log('title:'+arr[i].title.match(value));
+        if(arr[i].title.match(value) != null)
+        posts.push(arr[i])
+      }
+      // console.log('posts:'+posts);
+      this.setState({
+        posts:posts
+      })
+      // console.log(this.state.posts);
+    });
+
   }
   filterPosts(id) {
     const posts = filter((post) => {
       return post._id !== id
     }, this.state.posts);
-
-    this.setState({ posts: posts })
+    this.setState({
+      posts: posts,
+      searchPosts: posts
+    })
   }
  handleClick(value){
    this.setState({id: value});
@@ -109,6 +136,16 @@ export default class PostList extends Component {
     return(
       <div>
         <div style={styles.div}>
+          <div className="row">
+            <div className="col-lg-6">
+              <div className="input-group">
+                <span className="input-group-addon">
+                  <span className="glyphicon glyphicon-search" aria-hidden="true"></span>
+                </span>
+                <input type="text" className="form-control" aria-label="..." placeholder="搜索标题..." ref="search" onChange={this.handleChange.bind(this)}/>
+              </div>
+            </div>
+          </div>
           <Link to="/posts/new" style={styles.button}>添加文章</Link>
         </div>
         { postList }

@@ -9,7 +9,6 @@ class DeleteList extends React.Component {
     }
   }
   handleShow(){
-    console.log("show");
     this.setState({
       show:true
     })

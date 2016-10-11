@@ -24,7 +24,7 @@ class App extends Component {
     return (
       <div>
         <header style={styles.header}>
-          <div style={styles.link}>BORN TO CODE</div>
+          <Link to='/' style={styles.link}>BORN TO CODE</Link>
         </header>
         { this.props.children }
       </div>
